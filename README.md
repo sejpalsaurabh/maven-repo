@@ -11,3 +11,7 @@ Add the Following Repository to your pom.xml
     <url>https://github.com/sejpalsaurabh/maven-repo/raw/master</url>
 </repository>
 ```
+And ```groupId``` for this repository is
+```
+com.sejpalsaurabh
+```
