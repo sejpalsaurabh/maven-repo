@@ -6,13 +6,12 @@
 
     <groupId>com.sejpalsaurabh</groupId>
     <artifactId>postmark</artifactId>
-    <version>1.0</version>
-
+    <version>1.0.0-beta</version>
 
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <url>https://github.com/sejpalsaurabh/postmark/blob/master/LICENSE.md</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -56,15 +55,17 @@
         <maven-release-plugin.version>2.2.2</maven-release-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <maven-source-plugin.version>3.0.0</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
 
-
-        <apache-mime4j.version>0.6.1</apache-mime4j.version>
-        <commons-codec.version>1.6</commons-codec.version>
-        <commons-logging.version>1.1.1</commons-logging.version>
+        <apache-mime4j.version>0.7.2</apache-mime4j.version>
+        <commons-codec.version>1.10</commons-codec.version>
+        <commons-logging.version>1.2</commons-logging.version>
         <apache-commons-validator.version>1.5.0</apache-commons-validator.version>
-        <gson.version>2.2.1</gson.version>
-        <httpcomponents.version>4.2</httpcomponents.version>
-        <joda-time.version>2.1</joda-time.version>
+        <gson.version>2.6.2</gson.version>
+        <httpcomponents.version>4.5.2</httpcomponents.version>
+        <joda-time.version>2.9.3</joda-time.version>
+        <junit.version>4.12</junit.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gpg.skip>true</gpg.skip>
@@ -72,6 +73,25 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <rulesUri>http://res.cloudinary.com/sejpalsaurabh/raw/upload/v1459923089/versions-rules.xml
+                    </rulesUri>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>dependency-update</id>
+                        <goals>
+                            <goal>dependency-updates-report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -91,6 +111,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -138,6 +159,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>**/log4j.properties</exclude>
@@ -156,6 +178,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -166,6 +189,12 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -174,29 +203,43 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
             </plugin>
         </plugins>
     </reporting>
 
     <dependencies>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.james</groupId>
-            <artifactId>apache-mime4j</artifactId>
-            <version>${apache-mime4j.version}</version>
+            <artifactId>apache-mime4j-core</artifactId>
+            <version>0.7.2</version>
+        </dependency>-->
+
+        <!--<dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-mime4j-dom</artifactId>
+            <version>0.7.2</version>
         </dependency>
 
         <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-mime4j-storage</artifactId>
+            <version>0.7.2</version>
+        </dependency>-->
+
+
+        <!--<dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>${commons-codec.version}</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>${commons-logging.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -213,14 +256,14 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>${httpcomponents.version}</version>
+            <version>4.4.4</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>${httpcomponents.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>joda-time</groupId>
@@ -228,16 +271,23 @@
             <version>${joda-time.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>${apache-commons-validator.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log-4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
